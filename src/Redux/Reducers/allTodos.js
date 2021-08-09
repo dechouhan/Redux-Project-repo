@@ -9,6 +9,8 @@ import {
   RESET_LOGIN_MEMBER,
   SET_MEMBERS,
   DELETE_MEMBER,
+  SET_SHOW_MEMBER,
+  SHOW_MODEL_STATUS,
 } from "../Actions/index";
 
 const initialState = {
@@ -16,8 +18,10 @@ const initialState = {
   setUser: { name: "" },
   setAddModel: { status: false },
   setEditModel: { status: false },
+  setShowModel: { status: false },
   members: [],
-  setLoginMember:{name:""},
+  setLoginMember: { name: "" },
+  setShowMember: {},
 };
 
 const Todos = (state = initialState, action) => {
@@ -82,8 +86,22 @@ const Todos = (state = initialState, action) => {
       return {
         ...state,
         users: [
-          ...state.members.filter((setMember) => setMember.id !== action.payload),
+          ...state.members.filter(
+            (setMember) => setMember.id !== action.payload
+          ),
         ],
+      };
+
+    case SET_SHOW_MEMBER:
+      return {
+        ...state,
+        setShowMember: { ...state.setShowMember, ...action.payload },
+      };
+
+    case SHOW_MODEL_STATUS:
+      return {
+        ...state,
+        setShowModel: { ...state.setShowModel, ...action.payload },
       };
 
     default:

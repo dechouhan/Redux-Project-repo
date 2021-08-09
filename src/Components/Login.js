@@ -1,43 +1,61 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { loginMember } from '../Redux/thunks';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { loginMember } from "../Redux/thunks";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { Container } from "react-bootstrap";
 
 export default function Login() {
-    const history = useHistory()
-    const dispatch = useDispatch()
-    const loggedUser = useSelector(state=>state.Todos.setLoginMember)
-    console.log(loggedUser)
-    useEffect(()=>{
-        if (loggedUser.name){
-            history.push("/homepage")
-        }
-    })
-    const submitHandle = (e)=>{
-        e.preventDefault()
-        if( e.target.email.value && e.target.password.value){
-            dispatch(loginMember({
-                email: e.target.email.value,
-                password: e.target.password.value
-            }))
-            if (loggedUser.name){
-                history.push("/homepage")
-            }
-        } else {
-            alert("invlid input")
-        }
-        
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const loggedUser = useSelector((state) => state.Todos.setLoginMember);
+  useEffect(() => {
+    if (loggedUser._id) {
+      history.push("/homepage");
     }
+  });
+  const submitHandle = (e) => {
+    e.preventDefault();
+    if (e.target.email.value && e.target.password.value) {
+      dispatch(
+        loginMember({
+          email: e.target.email.value,
+          password: e.target.password.value,
+        })
+      );
+      if (loggedUser.name) {
+        history.push("/homepage");
+      }
+    } else {
+      alert("invlid input");
+    }
+  };
 
+  return (
+    <div>
+      <Container>
+        <Form method="post" onSubmit={submitHandle}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email" name="email" placeholder="Enter email" />
+          </Form.Group>
 
-    return (
-        <div>
-            <form method="post" onSubmit={submitHandle}>
-            <h1>Login Page</h1>
-            Email<input type="text" name="email"  placeholder="Your Email" /><br/>
-            Password<input type="password" name="password"  placeholder="Your Password" /><br/>
-            <button type="submit">Submit</button>
-            </form>
-        </div>
-    )
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              placeholder="Enter password"
+            />
+          </Form.Group>
+          <center>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </center>
+        </Form>
+      </Container>
+    </div>
+  );
 }

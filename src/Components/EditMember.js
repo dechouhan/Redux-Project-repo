@@ -3,39 +3,44 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createUser } from "../Redux/thunks";
-import { resetUser, setAddModelStatus } from "../Redux/Actions/allAction";
+import { updateMember } from "../Redux/thunks";
+import { setEditModelStatus } from "../Redux/Actions/allAction";
 
-export default function AddUser() {
+export default function EditMember() {
   const dispatch = useDispatch();
-  const show = useSelector((state) => state.Todos.setAddModel);
-  const handleClose = () => dispatch(setAddModelStatus({ status: false }));
+  const show = useSelector((state) => state.Todos.setEditModel);
+  const handleClose = () => dispatch(setEditModelStatus({ status: false }));
+  const loggedUser = useSelector((state) => state.Todos.setLoginMember);
 
   const submitUserHandle = (e) => {
     e.preventDefault();
     dispatch(
-      createUser({
+      updateMember(loggedUser._id, {
         name: e.target.name.value,
         email: e.target.email.value,
-        city: e.target.city.value,
-        field: e.target.field.value,
+        password: e.target.password.value,
       })
     );
-    dispatch(resetUser());
     handleClose();
   };
 
   return (
     <div>
+      {/* Form Model Code  */}
       <Modal show={show.status} onHide={handleClose}>
-        <Modal.Header closeButton aria-label="Close">
-          <Modal.Title>Add User</Modal.Title>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Member</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={submitUserHandle}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Name</Form.Label>
-              <Form.Control type="text" name="name" placeholder="Enter name" />
+              <Form.Control
+                type="text"
+                name="name"
+                defaultValue={loggedUser.name}
+                placeholder="Enter name"
+              />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -43,25 +48,18 @@ export default function AddUser() {
               <Form.Control
                 type="email"
                 name="email"
+                defaultValue={loggedUser.email}
                 placeholder="Enter email"
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>City</Form.Label>
+              <Form.Label>Password</Form.Label>
               <Form.Control
-                type="text"
-                name="city"
-                placeholder="Enter username"
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Field</Form.Label>
-              <Form.Control
-                type="text"
-                name="field"
-                placeholder="Enter address"
+                type="password"
+                name="password"
+                defaultValue={loggedUser.password}
+                placeholder="Enter New Password"
               />
             </Form.Group>
 

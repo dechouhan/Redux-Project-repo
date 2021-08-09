@@ -11,6 +11,9 @@ import {
   RESET_LOGIN_MEMBER,
   SET_MEMBERS,
   DELETE_MEMBER,
+  UPDATE_MEMBER,
+  SET_SHOW_MEMBER,
+  SHOW_MODEL_STATUS,
 } from "./index";
 
 export const setAddUser = (payload) => ({
@@ -52,6 +55,11 @@ export const setEditModelStatus = (status) => ({
   payload: status,
 });
 
+export const setShowModelStatus = (status) => ({
+  type: SHOW_MODEL_STATUS,
+  payload: status,
+});
+
 export const setLoginMember = (payload) => ({
   type: SET_LOGIN_MEMBER,
   payload,
@@ -66,7 +74,17 @@ export const fetchMembersAction = (data) => ({
   payload: data,
 });
 
-export const deleteMemberAction = (id) =>({
+export const deleteMemberAction = (id) => ({
   type: DELETE_MEMBER,
-  payload:id,
-})
+  payload: id,
+});
+
+export const updateMemberAction = (data) => ({
+  type: UPDATE_MEMBER,
+  payload: data,
+});
+
+export const setShowMember = (payload) => ({
+  type: SET_SHOW_MEMBER,
+  payload,
+});
