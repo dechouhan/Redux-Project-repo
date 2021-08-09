@@ -7,6 +7,10 @@ import {
   DELETE_USER,
   EDIT_MODEL_STATUS,
   ADD_MODEL_STATUS,
+  SET_LOGIN_MEMBER,
+  RESET_LOGIN_MEMBER,
+  SET_MEMBERS,
+  DELETE_MEMBER,
 } from "./index";
 
 export const setAddUser = (payload) => ({
@@ -47,3 +51,22 @@ export const setEditModelStatus = (status) => ({
   type: EDIT_MODEL_STATUS,
   payload: status,
 });
+
+export const setLoginMember = (payload) => ({
+  type: SET_LOGIN_MEMBER,
+  payload,
+});
+
+export const resetLoginMember = () => ({
+  type: RESET_LOGIN_MEMBER,
+});
+
+export const fetchMembersAction = (data) => ({
+  type: SET_MEMBERS,
+  payload: data,
+});
+
+export const deleteMemberAction = (id) =>({
+  type: DELETE_MEMBER,
+  payload:id,
+})

@@ -1,9 +1,14 @@
+import MemberService from "../Services/MemberService";
 import UserService from "../Services/Service";
+
 import {
   createUserAction,
   deleteUserAction,
   fetchUsersAction,
+  setLoginMember,
   updateUserAction,
+  fetchMembersAction,
+  deleteMemberAction,
 } from "./Actions/allAction";
 
 export const fetchUsers = () => async (dispatch) => {
@@ -43,6 +48,47 @@ export const deleteUser = (id) => async (dispatch) => {
     await UserService.delete(id);
     dispatch(deleteUserAction(id));
     dispatch(fetchUsers());
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
+export const signupMember = (data) => async (dispatch) => {
+  try {
+    console.log("signup thunk",data)
+    const res = await MemberService.signup(data);
+    return Promise.resolve(alert(JSON.stringify(res.data.message)));
+  } catch (err) {
+    return Promise.reject(alert(JSON.stringify(err)));
+  }
+};
+
+export const loginMember = (data) => async (dispatch) => {
+  try {
+    console.log("signup thunk",data)
+    const res = await MemberService.login(data);
+    return Promise.resolve(dispatch(setLoginMember(res.data)))
+  } catch (err) {
+    return Promise.reject(alert(err));
+  }
+};
+
+export const fetchMembers = () => async (dispatch) => {
+  try {
+    const res = await MemberService.getAll();
+    dispatch(fetchMembersAction(res.data));
+    return Promise.resolve(res.data);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+};
+
+export const deleteMembers = (id) => async (dispatch) => {
+  try {
+    await MemberService.delete(id);
+    dispatch(deleteMemberAction(id));
+    dispatch(fetchMembers());
   } catch (err) {
     console.log(err);
   }
