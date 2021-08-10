@@ -60,10 +60,11 @@ export const setShowModelStatus = (status) => ({
   payload: status,
 });
 
-export const setLoginMember = (payload) => ({
-  type: SET_LOGIN_MEMBER,
-  payload,
-});
+export const setLoginMember = (payload) => {
+  localStorage.setItem("token",payload.token)
+  localStorage.setItem("_id",payload._id)
+  return { type: SET_LOGIN_MEMBER, payload };
+};
 
 export const resetLoginMember = () => ({
   type: RESET_LOGIN_MEMBER,

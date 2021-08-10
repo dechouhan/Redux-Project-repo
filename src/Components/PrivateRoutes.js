@@ -2,21 +2,20 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Redirect, Route } from "react-router";
 
-const Protected = ({ component: Component, ...rest }) => {
-  debugger;
-  const loggedUser = useSelector((state) => state.Todos.setLoginMember);
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  const token = useSelector((state) => state.Todos.token);
   return (
     <Route
       {...rest}
-      render={(props) => {
-        loggedUser._id ? (
+      render={props => (
+         token? (
           <Component {...rest} {...props} />
         ) : (
           <Redirect to="/login" />
-        );
-      }}
+        )
+      )}
     />
   );
 };
 
-export default Protected;
+export default PrivateRoute;

@@ -10,7 +10,7 @@ export default function EditMember() {
   const dispatch = useDispatch();
   const show = useSelector((state) => state.Todos.setEditModel);
   const handleClose = () => dispatch(setEditModelStatus({ status: false }));
-  const loggedUser = useSelector((state) => state.Todos.setLoginMember);
+  const loggedUser = useSelector((state) => state.Todos.setShowMember);
 
   
   const submitUserHandle = (e) => {
@@ -59,7 +59,6 @@ export default function EditMember() {
               <Form.Control
                 type="password"
                 name="password"
-                defaultValue={loggedUser.password}
                 placeholder="Enter New Password"
               />
             </Form.Group>

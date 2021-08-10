@@ -7,12 +7,14 @@ import Navbar from "react-bootstrap/Navbar";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
 import Homepage from "./Components/Homepage";
-import { useSelector } from "react-redux";
 import Logout from "./Components/Logout";
 import Members from "./Components/ShowMembers";
+import { useSelector } from "react-redux";
+import PrivateRoute from "./Components/PrivateRoutes";
+import PublicRoute from "./Components/PublicRoute";
 
 function App() {
-  const loggedUser = useSelector((state) => state.Todos.setLoginMember);
+  const token = useSelector(state=>state.Todos.token)
   return (
     <div>
       <center>
@@ -26,7 +28,7 @@ function App() {
                 <Nav.Link as={Link} to="/users">
                   UserList
                 </Nav.Link>
-                {!loggedUser._id ? (
+                {!token ? (
                   <>
                     <Nav.Link as={Link} to="/signup">
                       SignUp
@@ -38,7 +40,7 @@ function App() {
                 ) : (
                   ""
                 )}
-                {loggedUser._id ? (
+                {token ? (
                   <>
                     <Nav.Link as={Link} to="/homepage">
                       Homepage
@@ -66,21 +68,26 @@ function App() {
             <Route exact path="/users">
               <Users />
             </Route>
-            <Route path="/signup">
+            {/* <Route path="/signup">
               <Signup />
-            </Route>
-            <Route path="/login">
+            </Route> */}
+            {/* <Route path="/login">
               <Login />
-            </Route>
-            <Route path="/homepage">
+            </Route> */}
+            {/* <Route path="/homepage">
               <Homepage />
-            </Route>
-            <Route path="/members">
+            </Route> */}
+            {/* <Route path="/members">
               <Members />
             </Route>
             <Route path="/logout">
               <Logout />
-            </Route>
+            </Route> */}
+            <PrivateRoute component={Homepage} exact path="/homepage" />
+            <PrivateRoute component={Members} exact path="/members" />
+            <PrivateRoute component={Logout} exact path="/logout" />
+            <PublicRoute component={Signup} exact path="/signup" />
+            <PublicRoute component={Login} exact path="/login" />
           </Switch>
         </BrowserRouter>
       </center>

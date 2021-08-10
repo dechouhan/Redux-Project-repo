@@ -20,8 +20,9 @@ const initialState = {
   setEditModel: { status: false },
   setShowModel: { status: false },
   members: [],
-  setLoginMember: { name: "" },
   setShowMember: {},
+  token:localStorage.getItem("token"),
+  _id: localStorage.getItem("_id")
 };
 
 const Todos = (state = initialState, action) => {
@@ -67,12 +68,15 @@ const Todos = (state = initialState, action) => {
     case SET_LOGIN_MEMBER:
       return {
         ...state,
-        setLoginMember: { ...state.setLoginMember, ...action.payload },
+        token: action.payload.token,
+        _id: action.payload._id,
       };
 
     case RESET_LOGIN_MEMBER:
       return {
         ...state,
+        token:null,
+        _id:null,
         setLoginMember: {},
       };
 

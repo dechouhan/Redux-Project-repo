@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { loginMember } from "../Redux/thunks";
@@ -9,12 +9,8 @@ import { Container } from "react-bootstrap";
 export default function Login() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const loggedUser = useSelector((state) => state.Todos.setLoginMember);
-  useEffect(() => {
-    if (loggedUser._id) {
-      history.push("/homepage");
-    }
-  });
+  const token = useSelector((state) => state.Todos.token);
+
   const submitHandle = (e) => {
     e.preventDefault();
     if (e.target.email.value && e.target.password.value) {
@@ -24,7 +20,7 @@ export default function Login() {
           password: e.target.password.value,
         })
       );
-      if (loggedUser.name) {
+      if (token) {
         history.push("/homepage");
       }
     } else {

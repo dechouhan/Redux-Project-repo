@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { signupMember } from "../Redux/thunks";
 import Button from "react-bootstrap/Button";
@@ -9,12 +9,8 @@ import { Container } from "react-bootstrap";
 export default function Signup() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const loggedUser = useSelector((state) => state.Todos.setLoginMember);
-  useEffect(() => {
-    if (loggedUser._id) {
-      history.push("/homepage");
-    }
-  }, [loggedUser,history]);
+
+
   const submitHandle = (e) => {
     e.preventDefault();
     if (

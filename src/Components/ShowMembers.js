@@ -16,7 +16,8 @@ function Members() {
   let member = null;
   const dispatch = useDispatch();
   const history = useHistory();
-  const loggedUser = useSelector((state) => state.Todos.setLoginMember);
+  const token = useSelector((state) => state.Todos.token);
+  const loggedUserId = useSelector((state) => state.Todos._id);
   const editModelStatus = useSelector((state) => state.Todos.setEditModel);
   const showModelStatus = useSelector((state) => state.Todos.setShowModel);
   useEffect(() => {
@@ -24,16 +25,17 @@ function Members() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (!loggedUser.name) {
+    if (!token) {
       history.push("/login");
     }
-  }, [loggedUser,history]);
+  }, [history,token]);
 
   const deleteMemberBtn = (memberData) => {
     dispatch(deleteMembers(memberData._id));
   };
 
-  const editMemberBtn = () => {
+  const editMemberBtn = (memberData) => {
+    dispatch(setShowMember(memberData));
     dispatch(setEditModelStatus({ status: true }));
   };
 
@@ -48,10 +50,10 @@ function Members() {
         <tr key={memberData._id}>
           <td>{memberData.name}</td>
           <td>{memberData.email}</td>
-          {loggedUser.name === memberData.name ? (
+          {loggedUserId === memberData._id ? (
             <>
               <td>
-                <Button variant="warning" onClick={() => editMemberBtn()}>
+                <Button variant="warning" onClick={() => editMemberBtn(memberData)}>
                   Edit
                 </Button>
                 &nbsp;&nbsp;

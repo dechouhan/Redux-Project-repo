@@ -8,6 +8,8 @@ export default function Logout() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(resetLoginMember());
+    localStorage.removeItem("_id")
+    localStorage.removeItem("token")
     alert("You are SuccessFully LogOut");
     history.push("/login");
   }, [dispatch,history]);

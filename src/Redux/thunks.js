@@ -96,7 +96,7 @@ export const updateMember = (id, data) => async (dispatch) => {
   try {
     const res = await MemberService.update(id, data);
     dispatch(updateMemberAction(res.data));
-    dispatch(fetchUsers());
+    dispatch(fetchMembers());
     return Promise.resolve(res.data);
   } catch (err) {
     return Promise.reject(err);
