@@ -3,14 +3,14 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "../Redux/thunks";
-import { resetUser, setEditModelStatus } from "../Redux/Actions/allAction";
+import { resetUser, setEditModelStatus } from "../Redux/Actions/userAction";
+import { updateUser } from "../API-Thunk/userThunk";
 
 export default function EditUser() {
   const dispatch = useDispatch();
-  const show = useSelector((state) => state.Todos.setEditModel);
+  const show = useSelector((state) => state.Users.setEditModel);
   const handleClose = () => dispatch(setEditModelStatus({ status: false }));
-  const selectUser = useSelector((state) => state.Todos.setUser);
+  const selectUser = useSelector((state) => state.Users.setUser);
 
   const submitUserHandle = (e) => {
     e.preventDefault();

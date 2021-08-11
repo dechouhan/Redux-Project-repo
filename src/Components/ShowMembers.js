@@ -2,24 +2,24 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import { deleteMembers, fetchMembers } from "../Redux/thunks";
 import { useHistory } from "react-router-dom";
-import {
-  setEditModelStatus,
-  setShowMember,
-  setShowModelStatus,
-} from "../Redux/Actions/allAction";
 import EditMember from "./EditMember";
 import ShowMemberFullInfo from "./ShowFullIInfoMember";
+import {
+  setShowMember,
+  setShowModelStatus,
+} from "../Redux/Actions/memberAction";
+import { setEditModelStatus } from "../Redux/Actions/userAction";
+import { deleteMembers, fetchMembers } from "../API-Thunk/memberThunk";
 
 function Members() {
   let member = null;
   const dispatch = useDispatch();
   const history = useHistory();
-  const token = useSelector((state) => state.Todos.token);
-  const loggedUserId = useSelector((state) => state.Todos._id);
-  const editModelStatus = useSelector((state) => state.Todos.setEditModel);
-  const showModelStatus = useSelector((state) => state.Todos.setShowModel);
+  const token = useSelector((state) => state.Members.token);
+  const loggedUserId = useSelector((state) => state.Members._id);
+  const editModelStatus = useSelector((state) => state.Users.setEditModel);
+  const showModelStatus = useSelector((state) => state.Members.setShowModel);
   useEffect(() => {
     dispatch(fetchMembers());
   }, [dispatch]);
@@ -28,7 +28,7 @@ function Members() {
     if (!token) {
       history.push("/login");
     }
-  }, [history,token]);
+  }, [history, token]);
 
   const deleteMemberBtn = (memberData) => {
     dispatch(deleteMembers(memberData._id));
@@ -43,7 +43,7 @@ function Members() {
     dispatch(setShowMember(memberData));
     dispatch(setShowModelStatus({ status: true }));
   };
-  const members = useSelector((state) => state.Todos.members);
+  const members = useSelector((state) => state.Members.members);
   if (members) {
     member = members.map((memberData) => {
       return (
@@ -53,7 +53,10 @@ function Members() {
           {loggedUserId === memberData._id ? (
             <>
               <td>
-                <Button variant="warning" onClick={() => editMemberBtn(memberData)}>
+                <Button
+                  variant="warning"
+                  onClick={() => editMemberBtn(memberData)}
+                >
                   Edit
                 </Button>
                 &nbsp;&nbsp;

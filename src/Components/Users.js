@@ -4,18 +4,18 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import AddUser from "./AddUser";
 import EditUser from "./EditUser";
-import { fetchUsers, deleteUser } from "../Redux/thunks";
 import {
-  setAddUser,
   setAddModelStatus,
+  setAddUser,
   setEditModelStatus,
-} from "../Redux/Actions/allAction";
+} from "../Redux/Actions/userAction";
+import { deleteUser, fetchUsers } from "../API-Thunk/userThunk";
 
 function Users() {
   let user = null;
   //user models state start
-  const addModelStatus = useSelector((state) => state.Todos.setAddModel);
-  const editModelStatus = useSelector((state) => state.Todos.setEditModel);
+  const addModelStatus = useSelector((state) => state.Users.setAddModel);
+  const editModelStatus = useSelector((state) => state.Users.setEditModel);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ function Users() {
     dispatch(setAddModelStatus({ status: true }));
   };
 
-  const users = useSelector((state) => state.Todos.users);
+  const users = useSelector((state) => state.Users.users);
   if (users) {
     user = users.map((userData) => {
       return (

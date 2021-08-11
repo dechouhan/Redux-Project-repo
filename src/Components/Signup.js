@@ -1,15 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { signupMember } from "../Redux/thunks";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Container } from "react-bootstrap";
+import { signupMember } from "../API-Thunk/memberThunk";
 
 export default function Signup() {
   const history = useHistory();
   const dispatch = useDispatch();
-
 
   const submitHandle = (e) => {
     e.preventDefault();

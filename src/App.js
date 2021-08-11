@@ -14,7 +14,7 @@ import PrivateRoute from "./Components/PrivateRoutes";
 import PublicRoute from "./Components/PublicRoute";
 
 function App() {
-  const token = useSelector(state=>state.Todos.token)
+  const token = useSelector((state) => state.Members.token);
   return (
     <div>
       <center>
@@ -28,18 +28,6 @@ function App() {
                 <Nav.Link as={Link} to="/users">
                   UserList
                 </Nav.Link>
-                {!token ? (
-                  <>
-                    <Nav.Link as={Link} to="/signup">
-                      SignUp
-                    </Nav.Link>
-                    <Nav.Link as={Link} to="/login">
-                      Login
-                    </Nav.Link>
-                  </>
-                ) : (
-                  ""
-                )}
                 {token ? (
                   <>
                     <Nav.Link as={Link} to="/homepage">
@@ -53,7 +41,14 @@ function App() {
                     </Nav.Link>
                   </>
                 ) : (
-                  ""
+                  <>
+                    <Nav.Link as={Link} to="/signup">
+                      SignUp
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/login">
+                      Login
+                    </Nav.Link>
+                  </>
                 )}
               </Nav>
             </Container>
@@ -68,21 +63,6 @@ function App() {
             <Route exact path="/users">
               <Users />
             </Route>
-            {/* <Route path="/signup">
-              <Signup />
-            </Route> */}
-            {/* <Route path="/login">
-              <Login />
-            </Route> */}
-            {/* <Route path="/homepage">
-              <Homepage />
-            </Route> */}
-            {/* <Route path="/members">
-              <Members />
-            </Route>
-            <Route path="/logout">
-              <Logout />
-            </Route> */}
             <PrivateRoute component={Homepage} exact path="/homepage" />
             <PrivateRoute component={Members} exact path="/members" />
             <PrivateRoute component={Logout} exact path="/logout" />

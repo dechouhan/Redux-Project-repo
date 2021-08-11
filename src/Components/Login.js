@@ -1,15 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { loginMember } from "../Redux/thunks";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Container } from "react-bootstrap";
+import { loginMember } from "../API-Thunk/memberThunk";
 
 export default function Login() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.Todos.token);
+  const token = useSelector((state) => state.Members.token);
 
   const submitHandle = (e) => {
     e.preventDefault();

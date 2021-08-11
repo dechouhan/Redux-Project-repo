@@ -2,12 +2,12 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { setShowModelStatus } from "../Redux/Actions/allAction";
+import { setShowModelStatus } from "../Redux/Actions/memberAction";
 
 export default function ShowMemberFullInfo() {
   const dispatch = useDispatch();
-  const show = useSelector((state) => state.Todos.setShowModel);
-  const selectedMember = useSelector((state) => state.Todos.setShowMember);
+  const show = useSelector((state) => state.Members.setShowModel);
+  const selectedMember = useSelector((state) => state.Members.setShowMember);
   const handleClose = () => dispatch(setShowModelStatus({ status: false }));
   return (
     <div>
