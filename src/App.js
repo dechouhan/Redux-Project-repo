@@ -12,6 +12,10 @@ import Members from "./Components/ShowMembers";
 import { useSelector } from "react-redux";
 import PrivateRoute from "./Components/PrivateRoutes";
 import PublicRoute from "./Components/PublicRoute";
+import AllPosts from "./Components/Posts/showAllPosts";
+import MyAllPosts from "./Components/Posts/showMyPosts";
+import AddPost from "./Components/Posts/addPost";
+import ShowComments from "./Components/Comments/showComments";
 
 function App() {
   const token = useSelector((state) => state.Members.token);
@@ -32,6 +36,12 @@ function App() {
                   <>
                     <Nav.Link as={Link} to="/homepage">
                       Homepage
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/allposts">
+                      All Posts
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/myallposts">
+                      My All Posts
                     </Nav.Link>
                     <Nav.Link as={Link} to="/members">
                       MembersList
@@ -66,6 +76,10 @@ function App() {
             <PrivateRoute component={Homepage} exact path="/homepage" />
             <PrivateRoute component={Members} exact path="/members" />
             <PrivateRoute component={Logout} exact path="/logout" />
+            <PrivateRoute component={AllPosts} exact path="/allposts" />
+            <PrivateRoute component={MyAllPosts} exact path="/myallposts" />
+            <PrivateRoute component={AddPost} exact path="/addpost" />
+            <PrivateRoute component={ShowComments} exact path="/showcomments" />
             <PublicRoute component={Signup} exact path="/signup" />
             <PublicRoute component={Login} exact path="/login" />
           </Switch>
