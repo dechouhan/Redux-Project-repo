@@ -16,6 +16,7 @@ export const DELETE_MEMBER = "DELETE_MEMBER";
 export const UPDATE_MEMBER = "UPDATE_MEMBER";
 export const SET_SHOW_MEMBER = "SET_SHOW_MEMBER";
 export const SHOW_MODEL_STATUS = "SHOW_MODEL_STATUS";
+export const SEARCH_MEMBER = "SEARCH_MEMBER";
 
 //For Posts
 export const SET_POSTS = "SET_POSTS";

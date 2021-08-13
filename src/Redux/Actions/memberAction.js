@@ -6,6 +6,7 @@ import {
   UPDATE_MEMBER,
   SET_SHOW_MEMBER,
   SHOW_MODEL_STATUS,
+  SEARCH_MEMBER,
 } from "./index";
 
 export const setShowModelStatus = (status) => ({
@@ -40,5 +41,10 @@ export const updateMemberAction = (data) => ({
 
 export const setShowMember = (payload) => ({
   type: SET_SHOW_MEMBER,
+  payload,
+});
+
+export const searchMemberAction = (payload) => ({
+  type: SEARCH_MEMBER,
   payload,
 });

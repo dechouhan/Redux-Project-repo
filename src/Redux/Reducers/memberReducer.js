@@ -5,6 +5,7 @@ import {
   DELETE_MEMBER,
   SET_SHOW_MEMBER,
   SHOW_MODEL_STATUS,
+  SEARCH_MEMBER,
 } from "../Actions/index";
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   setShowMember: {},
   token: localStorage.getItem("token"),
   _id: localStorage.getItem("_id"),
+  searchMember: [],
 };
 
 const Members = (state = initialState, action) => {
@@ -59,6 +61,11 @@ const Members = (state = initialState, action) => {
         setShowModel: { ...state.setShowModel, ...action.payload },
       };
 
+    case SEARCH_MEMBER:
+      return {
+        ...state,
+        searchMember: [...action.payload],
+      };
     default:
       return state;
   }

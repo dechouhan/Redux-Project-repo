@@ -16,6 +16,7 @@ import AllPosts from "./Components/Posts/showAllPosts";
 import MyAllPosts from "./Components/Posts/showMyPosts";
 import AddPost from "./Components/Posts/addPost";
 import ShowComments from "./Components/Comments/showComments";
+import SearchMember from "./Components/SearchMemberAutocomplete";
 
 function App() {
   const token = useSelector((state) => state.Members.token);
@@ -72,6 +73,9 @@ function App() {
             </Route>
             <Route exact path="/users">
               <Users />
+            </Route>
+            <Route exact path="/search">
+              <SearchMember />
             </Route>
             <PrivateRoute component={Homepage} exact path="/homepage" />
             <PrivateRoute component={Members} exact path="/members" />
