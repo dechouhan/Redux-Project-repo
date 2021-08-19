@@ -15,6 +15,7 @@ const initialState = {
   token: localStorage.getItem("token"),
   _id: localStorage.getItem("_id"),
   searchMember: [],
+  username:localStorage.getItem("name"),
 };
 
 const Members = (state = initialState, action) => {
@@ -24,6 +25,7 @@ const Members = (state = initialState, action) => {
         ...state,
         token: action.payload.token,
         _id: action.payload._id,
+        username:action.payload.name,
       };
 
     case RESET_LOGIN_MEMBER:

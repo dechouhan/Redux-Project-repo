@@ -31,3 +31,10 @@ export const UPDATE_POST = "UPDATE_POST";
 export const CREATE_COMMENT = "CREATE_COMMENT";
 export const SET_COMMENTS_BY_ID = "SET_COMMENTS_BY_ID";
 export const SET_ADD_POST_FOR_COMMENTS = "SET_ADD_POST_FOR_COMMENTS";
+
+//For Tasks
+export const CREATE_TASK = "CREATE_TASK";
+export const SET_TASKS = "SET_TASKS";
+export const SET_START_DATE = "SET_START_DATE";
+export const SET_END_DATE = "SET_END_DATE";
+export const RESET_DATE = "RESET_DATE"

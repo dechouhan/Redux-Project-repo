@@ -17,7 +17,11 @@ import MyAllPosts from "./Components/Posts/showMyPosts";
 import AddPost from "./Components/Posts/addPost";
 import ShowComments from "./Components/Comments/showComments";
 import SearchMember from "./Components/SearchMemberAutocomplete";
-
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+import 'bootstrap/dist/css/bootstrap.css';
+import AddTask from "./Components/Task/AddTask";
+import ShowTasks from "./Components/Task/ShowTask";
 function App() {
   const token = useSelector((state) => state.Members.token);
   return (
@@ -46,6 +50,12 @@ function App() {
                     </Nav.Link>
                     <Nav.Link as={Link} to="/members">
                       MembersList
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/addtask">
+                      AddTask
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/showtasks">
+                      ShowTask
                     </Nav.Link>
                     <Nav.Link as={Link} to="/logout">
                       Logout
@@ -84,6 +94,8 @@ function App() {
             <PrivateRoute component={MyAllPosts} exact path="/myallposts" />
             <PrivateRoute component={AddPost} exact path="/addpost" />
             <PrivateRoute component={ShowComments} exact path="/showcomments" />
+            <PrivateRoute component={AddTask} exact path="/addtask" />
+            <PrivateRoute component={ShowTasks} exact path="/showtasks" />
             <PublicRoute component={Signup} exact path="/signup" />
             <PublicRoute component={Login} exact path="/login" />
           </Switch>

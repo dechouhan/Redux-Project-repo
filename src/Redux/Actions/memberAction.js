@@ -17,6 +17,7 @@ export const setShowModelStatus = (status) => ({
 export const setLoginMember = (payload) => {
   localStorage.setItem("token", payload.token);
   localStorage.setItem("_id", payload._id);
+  localStorage.setItem("name", payload.name);
   return { type: SET_LOGIN_MEMBER, payload };
 };
 

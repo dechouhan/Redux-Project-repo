@@ -5,7 +5,9 @@ import App from "./App";
 import store from "./Redux/Store";
 import { Provider } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+import 'bootstrap/dist/css/bootstrap.css';
 ReactDOM.render(
   <Provider store={store}>
     <App />
