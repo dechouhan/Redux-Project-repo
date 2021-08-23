@@ -1,4 +1,4 @@
-import { CREATE_TASK, RESET_DATE, SET_END_DATE, SET_START_DATE, SET_TASKS } from ".";
+import { CREATE_TASK, RESET_DATE, SET_END_DATE, SET_NAME, SET_START_DATE, SET_TASKS } from ".";
 
 export const createTaskAction = (data) => ({
   type: CREATE_TASK,
@@ -22,4 +22,9 @@ export const setEndDateAction = (data)=>({
 
 export const resetDateAction = ()=>({
     type:RESET_DATE,
+})
+
+export const setNameAction = (data)=>({
+    type:SET_NAME,
+    payload:data,
 })

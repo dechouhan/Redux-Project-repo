@@ -1,4 +1,7 @@
-import { createTaskAction, fetchTasksAction } from "../Redux/Actions/taskAction";
+import {
+  createTaskAction,
+  fetchTasksAction,
+} from "../Redux/Actions/taskAction";
 import TaskService from "../Services/TaskService";
 
 export const createTask = (data) => async (dispatch) => {
@@ -11,12 +14,11 @@ export const createTask = (data) => async (dispatch) => {
 };
 
 export const fetchTasks = () => async (dispatch) => {
-    try {
-      const res = await TaskService.getAll();
-      console.log("fetch tasks",res.data)
-      dispatch(fetchTasksAction(res.data));
-      return Promise.resolve(res.data);
-    } catch (err) {
-      return Promise.reject(err);
-    }
-  };
+  try {
+    const res = await TaskService.getAll();
+    dispatch(fetchTasksAction(res.data));
+    return Promise.resolve(res.data);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+};

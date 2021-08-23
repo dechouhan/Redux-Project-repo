@@ -37,4 +37,5 @@ export const CREATE_TASK = "CREATE_TASK";
 export const SET_TASKS = "SET_TASKS";
 export const SET_START_DATE = "SET_START_DATE";
 export const SET_END_DATE = "SET_END_DATE";
-export const RESET_DATE = "RESET_DATE"
+export const RESET_DATE = "RESET_DATE";
+export const SET_NAME = "SET_NAME";

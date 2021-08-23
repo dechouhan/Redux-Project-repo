@@ -6,10 +6,10 @@ import {
   fetchTasksAction,
   resetDateAction,
   setEndDateAction,
+  setNameAction,
   setStartDateAction,
 } from "../../Redux/Actions/taskAction";
 import axios from "axios";
-
 function ShowTasks() {
   let task = null;
   const dispatch = useDispatch();
@@ -19,17 +19,21 @@ function ShowTasks() {
     dispatch(resetDateAction());
   }, [dispatch]);
 
-  const Search = async (key) => {
-    const res = await axios.get(`http://localhost:7000/tasks/${key}`);
+  const Search = async () => {
+    const res = await axios.get(
+      `http://localhost:7000/tasks?startDate=${startDate}&endDate=${endDate}`
+    );
     dispatch(fetchTasksAction(res.data));
   };
   const startDate = useSelector((state) => state.Tasks.startDate);
   const endDate = useSelector((state) => state.Tasks.endDate);
+  const setName = useSelector((state) => state.Tasks.setName);
   let tasks = useSelector((state) => state.Tasks.tasks);
-  if (startDate && endDate) {
+  if (setName) {
+    const checkName = new RegExp(setName, "gi");
     if (tasks) {
       task = tasks.map((userTask) => {
-        if (userTask.date >= startDate && userTask.date <= endDate) {
+        if (userTask.username.match(checkName)) {
           return (
             <tr key={userTask._id}>
               <td>{userTask.title}</td>
@@ -75,10 +79,11 @@ function ShowTasks() {
         name="endDate"
         onChange={(e) => dispatch(setEndDateAction(e.target.value))}
       />
+      <button onClick={(e) => Search()}>Show</button>
       &nbsp;<label>Search by Name:-&nbsp;</label>
       <input
         type="text"
-        onChange={(e) => Search(e.target.value)}
+        onChange={(e) => dispatch(setNameAction(e.target.value))}
         name="search"
         placeholder="Enter Keyword"
       />

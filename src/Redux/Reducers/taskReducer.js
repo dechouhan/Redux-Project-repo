@@ -2,6 +2,7 @@ import {
   CREATE_TASK,
   RESET_DATE,
   SET_END_DATE,
+  SET_NAME,
   SET_START_DATE,
   SET_TASKS,
 } from "../Actions";
@@ -10,6 +11,7 @@ const initialState = {
   tasks: [],
   startDate: null,
   endDate: null,
+  setName:null,
 };
 
 const Tasks = (state = initialState, action) => {
@@ -42,7 +44,12 @@ const Tasks = (state = initialState, action) => {
         startDate:null,
         endDate: null,
       };
-
+    
+    case SET_NAME:
+      return {
+        ...state,
+        setName: action.payload,
+      };
     default:
       return state;
   }
