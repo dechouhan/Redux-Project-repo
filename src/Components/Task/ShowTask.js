@@ -12,6 +12,7 @@ import {
 import axios from "axios";
 function ShowTasks() {
   let task = null;
+  let count = 0
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,6 +35,7 @@ function ShowTasks() {
     if (tasks) {
       task = tasks.map((userTask) => {
         if (userTask.username.match(checkName)) {
+          count+=1
           return (
             <tr key={userTask._id}>
               <td>{userTask.title}</td>
@@ -51,6 +53,7 @@ function ShowTasks() {
   } else {
     if (tasks) {
       task = tasks.map((userTask) => {
+        count+=1
         return (
           <tr key={userTask._id}>
             <td>{userTask.title}</td>
@@ -88,6 +91,7 @@ function ShowTasks() {
         placeholder="Enter Keyword"
       />
       <p style={{ textAlign: "right", paddingRight: "20px" }}></p>
+      {count?
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -99,7 +103,7 @@ function ShowTasks() {
           </tr>
         </thead>
         <tbody>{task}</tbody>
-      </Table>
+      </Table>:<h1>Data Not Found</h1>}
     </div>
   );
 }
